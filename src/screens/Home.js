@@ -142,35 +142,51 @@ const HomeScreen = () => {
                 </Text>
               </View>
             </TouchableWithoutFeedback>
-            <View style={styles.box}>
-              <Image
-                source={require('../../assets/card/stethoscope.png')}
-                style={{width: 70, height: 70}}
-              />
-              <Text style={{marginTop: 5, textAlign: 'center'}}>
-                ตรวจสุขภาพ{'\n'}ด้วยตนเอง
-              </Text>
-            </View>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                navigation.navigate('healthCheck');
+              }}>
+              <View style={styles.box}>
+                <Image
+                  source={require('../../assets/card/stethoscope.png')}
+                  style={{width: 70, height: 70}}
+                />
+                <Text style={{marginTop: 5, textAlign: 'center'}}>
+                  ตรวจสุขภาพ{'\n'}ด้วยตนเอง
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
           </View>
+
           <View style={styles.rowCard}>
-            <View style={styles.box}>
-              <Image
-                source={require('../../assets/card/profile.png')}
-                style={{width: 70, height: 70}}
-              />
-              <Text style={{marginTop: 5, textAlign: 'center'}}>
-                ภาวะสุขภาพ
-              </Text>
-            </View>
-            <View style={styles.box}>
-              <Image
-                source={require('../../assets/card/clinic-history.png')}
-                style={{width: 70, height: 70}}
-              />
-              <Text style={{marginTop: 5, textAlign: 'center'}}>
-                ผลการดูแล{'\n'}รักษาสุขภาพ
-              </Text>
-            </View>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                navigation.navigate('resultHealthCheck');
+              }}>
+              <View style={styles.box}>
+                <Image
+                  source={require('../../assets/card/profile.png')}
+                  style={{width: 70, height: 70}}
+                />
+                <Text style={{marginTop: 5, textAlign: 'center'}}>
+                  ภาวะสุขภาพ
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                navigation.navigate('resultHealthCare');
+              }}>
+              <View style={styles.box}>
+                <Image
+                  source={require('../../assets/card/clinic-history.png')}
+                  style={{width: 70, height: 70}}
+                />
+                <Text style={{marginTop: 5, textAlign: 'center'}}>
+                  ผลการดูแล{'\n'}รักษาสุขภาพ
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
           </View>
         </ScrollView>
       </SafeAreaView>
