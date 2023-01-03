@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {
   StyleSheet,
   Text,
@@ -10,19 +8,16 @@ import {
   SafeAreaView,
   Image,
 } from 'react-native';
-import Background from '../themes/BackGroundSession';
-import {useForm, Controller} from 'react-hook-form';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import {useSelector, useDispatch} from 'react-redux';
 import {Avatar, Divider} from 'react-native-paper';
-import Colors from '../themes/Colors';
+import React from 'react';
+import Background from '../../themes/BackGroundSession';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
-
-const HomeScreen = () => {
+import {useSelector, useDispatch} from 'react-redux';
+export default function HomeStaffScreen() {
   const user = useSelector(state => state.user);
   const navigation = useNavigation();
-
   const handleLogout = () => {
     Alert.alert('ยืนยัน', 'คุณต้องการออกจากระบบ จริงหรือไม่?', [
       {
@@ -78,7 +73,7 @@ const HomeScreen = () => {
               ) : (
                 <Avatar.Image
                   size={80}
-                  source={require('../../assets/person.png')}
+                  source={require('../../../assets/person.png')}
                 />
               )}
             </View>
@@ -97,31 +92,25 @@ const HomeScreen = () => {
             เมนูให้บริการ
           </Text>
           <View style={styles.rowCard}>
-            <TouchableWithoutFeedback
-              onPress={() => {
-                navigation.navigate('patientRegister');
-              }}>
+            <TouchableWithoutFeedback onPress={() => {}}>
               <View style={styles.box}>
                 <Image
-                  source={require('../../assets/card/checklist.png')}
+                  source={require('../../../assets/adminCard/person-health.png')}
                   style={{width: 70, height: 70}}
                 />
                 <Text style={{marginTop: 5, textAlign: 'center'}}>
-                  ลงทะเบียนตรวจ{'\n'}สุขภาพประจำปี
+                  จัดการข้อมูล{'\n'}ผู้ป่วย
                 </Text>
               </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback
-              onPress={() => {
-                navigation.navigate('schedule');
-              }}>
+            <TouchableWithoutFeedback onPress={() => {}}>
               <View style={styles.box}>
                 <Image
-                  source={require('../../assets/card/schedule.png')}
+                  source={require('../../../assets/adminCard/doctor.png')}
                   style={{width: 70, height: 70}}
                 />
                 <Text style={{marginTop: 5, textAlign: 'center'}}>
-                  กำหนดการ{'\n'}ตรวจสุขภาพ
+                  จัดการข้อมูล{'\n'}อสม.
                 </Text>
               </View>
             </TouchableWithoutFeedback>
@@ -129,60 +118,26 @@ const HomeScreen = () => {
           <View style={styles.rowCard}>
             <TouchableWithoutFeedback
               onPress={() => {
-                navigation.navigate('doctorAdvice');
+                navigation.navigate('appoint');                
               }}>
               <View style={styles.box}>
                 <Image
-                  source={require('../../assets/card/doctor.png')}
+                  source={require('../../../assets/adminCard/calenda.png')}
                   style={{width: 70, height: 70}}
                 />
                 <Text style={{marginTop: 5, textAlign: 'center'}}>
-                  คำแนะนำ{'\n'}ด้านการดูแลรักษา
+                  จัดการข้อมูล{'\n'}กำหนดการ
                 </Text>
               </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback
-              onPress={() => {
-                navigation.navigate('healthCheck');
-              }}>
+            <TouchableWithoutFeedback onPress={() => {}}>
               <View style={styles.box}>
                 <Image
-                  source={require('../../assets/card/stethoscope.png')}
+                  source={require('../../../assets/adminCard/paper.png')}
                   style={{width: 70, height: 70}}
                 />
                 <Text style={{marginTop: 5, textAlign: 'center'}}>
-                  ตรวจสุขภาพ{'\n'}ด้วยตนเอง
-                </Text>
-              </View>
-            </TouchableWithoutFeedback>
-          </View>
-
-          <View style={styles.rowCard}>
-            <TouchableWithoutFeedback
-              onPress={() => {
-                navigation.navigate('resultHealthCheck');
-              }}>
-              <View style={styles.box}>
-                <Image
-                  source={require('../../assets/card/profile.png')}
-                  style={{width: 70, height: 70}}
-                />
-                <Text style={{marginTop: 5, textAlign: 'center'}}>
-                  ภาวะสุขภาพ
-                </Text>
-              </View>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback
-              onPress={() => {
-                navigation.navigate('resultHealthCare');
-              }}>
-              <View style={styles.box}>
-                <Image
-                  source={require('../../assets/card/clinic-history.png')}
-                  style={{width: 70, height: 70}}
-                />
-                <Text style={{marginTop: 5, textAlign: 'center'}}>
-                  ผลการดูแล{'\n'}รักษาสุขภาพ
+                  ดาวน์โหลดเอกสาร{'\n'}และรายงานผล
                 </Text>
               </View>
             </TouchableWithoutFeedback>
@@ -191,7 +146,7 @@ const HomeScreen = () => {
       </SafeAreaView>
     </Background>
   );
-};
+}
 
 const styles = StyleSheet.create({
   headers: {
@@ -200,7 +155,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   user: {
-    marginTop: 30,
+    marginTop: 10,
     marginBottom: 15,
     flexDirection: 'row',
     alignItems: 'center',
@@ -214,7 +169,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   rowCard: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
   },
@@ -230,5 +184,3 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
 });
-
-export default HomeScreen;

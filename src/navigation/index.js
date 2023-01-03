@@ -15,6 +15,7 @@ import DoctorAdvice from '../screens/DoctorAdvice';
 import HealthCheckScreen from '../screens/HealthCheck';
 import ResultHealtCheckScreen from '../screens/ResultHealtCheck';
 import ResultHealtCareScreen from '../screens/ResultHealtCare';
+import AppointScreen from '../screens/staff/Appoint';
 
 const InitNavigation = () => {
   return (
@@ -36,6 +37,7 @@ const InitNavigation = () => {
       <Stack.Screen name="healthCheck" component={HealthCheckScreen} />
       <Stack.Screen name="resultHealthCheck" component={ResultHealtCheckScreen} />
       <Stack.Screen name="resultHealthCare" component={ResultHealtCareScreen} />
+      <Stack.Screen name="appoint" component={AppointScreen} />
     </Stack.Navigator>
   );
 };

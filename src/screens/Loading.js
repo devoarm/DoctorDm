@@ -7,11 +7,14 @@ import {ActivityIndicator, MD2Colors} from 'react-native-paper';
 import firestore from '@react-native-firebase/firestore';
 import {useSelector, useDispatch} from 'react-redux';
 import {setUserSlice} from '../store/userSlice';
+import HomeStaffScreen from './staff/HomeStaff';
 function Loading({navigation}) {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false)
   const [user, setUser] = useState();
   const dispatch = useDispatch();
+  const authReducer = useSelector(state => state.user);
   // Handle user state changes
   async function onAuthStateChanged(user) {
     // return await auth().signOut();
@@ -19,7 +22,9 @@ function Loading({navigation}) {
       const userDoc = await firestore().collection('users').doc(user.uid).get();
       if (userDoc.data()) {
         // console.log(user);
-        console.log(userDoc.data());
+        
+        console.log(userDoc.data().isAdmin);
+        setIsAdmin(userDoc.data().isAdmin)
         dispatch(
           setUserSlice({
             f_name: userDoc.data().f_name,
@@ -27,14 +32,15 @@ function Loading({navigation}) {
             phone: userDoc.data().phone,
             cid: userDoc.data().cid,
             email: user.email,
-            uid: user.uid,            
+            uid: user.uid,
             photoURL: user.photoURL,
+            isAdmin: user.isAdmin
           }),
         );
       } else {
         navigation.replace('registerGoogle');
       }
-      setUser(user);
+      setUser(user);      
     }
     if (initializing) setInitializing(false);
   }
@@ -48,8 +54,12 @@ function Loading({navigation}) {
 
   if (!user) {
     return <Login />;
+  } 
+  if(isAdmin){
+    return <HomeStaffScreen />
+  } else{
+    return <HomeScreen />;
   }
 
-  return <HomeScreen />;
 }
 export default Loading;
