@@ -59,7 +59,14 @@ const Login = () => {
               if (querySnapshotPw.size > 0) {
                 querySnapshotPw.docs.forEach(doc => {
                   console.log(doc.data());
-                  
+                  auth()
+                    .signInWithEmailAndPassword(
+                      doc.data().email,
+                      doc.data().password,
+                    )
+                    .then(() => {
+                      navigation.replace('loading');
+                    });
                 });
               } else {
                 setError('password', {
@@ -75,7 +82,7 @@ const Login = () => {
     setLoading(false);
   };
   const handleGoogleSingin = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       await GoogleSignin.hasPlayServices();
       const {idToken} = await GoogleSignin.signIn();
@@ -95,7 +102,7 @@ const Login = () => {
     } catch (error) {
       console.log(error.message);
     }
-    setLoading(false)
+    setLoading(false);
   };
   return (
     <Background>
@@ -105,88 +112,88 @@ const Login = () => {
         message="กรุณารอสักครู่..."
       />
       <ScrollView
-        contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}>        
-          <View
-            style={{
-              marginHorizontal: 30,
-            }}>
-            <Text style={styles.text}>เข้าสู้ระบบ | Login</Text>
-            <View>
-              <Controller
-                control={control}
-                render={({field: {onChange, onBlur, value}}) => (
-                  <TextInput
-                    style={{marginVertical: 5}}
-                    label="รหัสบัตรประชาชน"
-                    value={value}
-                    onBlur={onBlur}
-                    onChangeText={value => onChange(value)}
-                    error={errors.cid && true}
-                  />
-                )}
-                name="cid"
-                rules={{required: 'กรุณากรอกรหัสบัตรประชาชน!'}}
-              />
-              {errors.cid && (
-                <HelperText type="error">{errors.cid.message}</HelperText>
-              )}
-            </View>
+        contentContainerStyle={{flexGrow: 1, justifyContent: 'center'}}>
+        <View
+          style={{
+            marginHorizontal: 30,
+          }}>
+          <Text style={styles.text}>เข้าสู้ระบบ | Login</Text>
+          <View>
             <Controller
               control={control}
               render={({field: {onChange, onBlur, value}}) => (
                 <TextInput
                   style={{marginVertical: 5}}
-                  label="รหัสผ่าน(password)"
+                  label="รหัสบัตรประชาชน"
                   value={value}
                   onBlur={onBlur}
                   onChangeText={value => onChange(value)}
-                  error={errors.password && true}
-                  secureTextEntry={secureText}
-                  right={
-                    <TextInput.Icon
-                      icon="eye"
-                      onPress={() => {
-                        setsecureText(!secureText);
-                      }}
-                    />
-                  }
+                  error={errors.cid && true}
                 />
               )}
-              name="password"
-              rules={{required: 'กรุณากรอกรหัสผ่าน !'}}
+              name="cid"
+              rules={{required: 'กรุณากรอกรหัสบัตรประชาชน!'}}
             />
-
-            {errors.password && (
-              <HelperText type="error">{errors.password.message}</HelperText>
+            {errors.cid && (
+              <HelperText type="error">{errors.cid.message}</HelperText>
             )}
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginTop: 30,
-              }}>
-              <Button
-                style={{marginHorizontal: 10, backgroundColor: 'grey'}}
-                mode="contained"
-                onPress={handleSubmit(onSubmit)}>
-                เข้าสู้ระบบ
-              </Button>
-              <Text>|</Text>
-              <Button
-                style={{marginHorizontal: 10, backgroundColor: 'goldenrod'}}
-                mode="contained"
-                onPress={() => navigation.navigate('register')}>
-                ลงทะเบียน
-              </Button>
-            </View>
-            <Text style={{textAlign: 'center', marginVertical: 20}}>หรือ</Text>
-            <GoogleSigninButton
-              size={GoogleSigninButton.Size.Wide}
-              color={GoogleSigninButton.Color.Dark}
-              onPress={handleGoogleSingin}
-            />
-          </View>          
+          </View>
+          <Controller
+            control={control}
+            render={({field: {onChange, onBlur, value}}) => (
+              <TextInput
+                style={{marginVertical: 5}}
+                label="รหัสผ่าน(password)"
+                value={value}
+                onBlur={onBlur}
+                onChangeText={value => onChange(value)}
+                error={errors.password && true}
+                secureTextEntry={secureText}
+                right={
+                  <TextInput.Icon
+                    icon="eye"
+                    onPress={() => {
+                      setsecureText(!secureText);
+                    }}
+                  />
+                }
+              />
+            )}
+            name="password"
+            rules={{required: 'กรุณากรอกรหัสผ่าน !'}}
+          />
+
+          {errors.password && (
+            <HelperText type="error">{errors.password.message}</HelperText>
+          )}
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 30,
+            }}>
+            <Button
+              style={{marginHorizontal: 10, backgroundColor: 'grey'}}
+              mode="contained"
+              onPress={handleSubmit(onSubmit)}>
+              เข้าสู้ระบบ
+            </Button>
+            <Text>|</Text>
+            <Button
+              style={{marginHorizontal: 10, backgroundColor: 'goldenrod'}}
+              mode="contained"
+              onPress={() => navigation.navigate('register')}>
+              ลงทะเบียน
+            </Button>
+          </View>
+          <Text style={{textAlign: 'center', marginVertical: 20}}>หรือ</Text>
+          <GoogleSigninButton
+            size={GoogleSigninButton.Size.Wide}
+            color={GoogleSigninButton.Color.Dark}
+            onPress={handleGoogleSingin}
+          />
+        </View>
       </ScrollView>
     </Background>
   );

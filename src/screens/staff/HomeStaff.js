@@ -39,12 +39,14 @@ export default function HomeStaffScreen() {
     <Background>
       <SafeAreaView style={{flex: 1}}>
         <View style={styles.headers}>
-          <Icon
-            size={25}
-            color={Colors.black}
-            style={{marginHorizontal: 10}}
-            name="user-cog"
-          />
+          <TouchableWithoutFeedback onPress={()=>{navigation.navigate('myProfile')}}>
+            <Icon
+              size={25}
+              color={Colors.black}
+              style={{marginHorizontal: 10}}
+              name="user-cog"
+            />
+          </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={handleLogout}>
             <Icon
               size={25}
@@ -92,25 +94,17 @@ export default function HomeStaffScreen() {
             เมนูให้บริการ
           </Text>
           <View style={styles.rowCard}>
-            <TouchableWithoutFeedback onPress={() => {}}>
+            <TouchableWithoutFeedback
+              onPress={() => {
+                navigation.navigate('users');
+              }}>
               <View style={styles.box}>
                 <Image
                   source={require('../../../assets/adminCard/person-health.png')}
                   style={{width: 70, height: 70}}
                 />
                 <Text style={{marginTop: 5, textAlign: 'center'}}>
-                  จัดการข้อมูล{'\n'}ผู้ป่วย
-                </Text>
-              </View>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => {}}>
-              <View style={styles.box}>
-                <Image
-                  source={require('../../../assets/adminCard/doctor.png')}
-                  style={{width: 70, height: 70}}
-                />
-                <Text style={{marginTop: 5, textAlign: 'center'}}>
-                  จัดการข้อมูล{'\n'}อสม.
+                  จัดการข้อมูล{'\n'}ผู้ใช้งาน
                 </Text>
               </View>
             </TouchableWithoutFeedback>
@@ -118,7 +112,7 @@ export default function HomeStaffScreen() {
           <View style={styles.rowCard}>
             <TouchableWithoutFeedback
               onPress={() => {
-                navigation.navigate('appoint');                
+                navigation.navigate('appoint');
               }}>
               <View style={styles.box}>
                 <Image
@@ -127,17 +121,6 @@ export default function HomeStaffScreen() {
                 />
                 <Text style={{marginTop: 5, textAlign: 'center'}}>
                   จัดการข้อมูล{'\n'}กำหนดการ
-                </Text>
-              </View>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => {}}>
-              <View style={styles.box}>
-                <Image
-                  source={require('../../../assets/adminCard/paper.png')}
-                  style={{width: 70, height: 70}}
-                />
-                <Text style={{marginTop: 5, textAlign: 'center'}}>
-                  ดาวน์โหลดเอกสาร{'\n'}และรายงานผล
                 </Text>
               </View>
             </TouchableWithoutFeedback>

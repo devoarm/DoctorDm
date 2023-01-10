@@ -16,6 +16,11 @@ import HealthCheckScreen from '../screens/HealthCheck';
 import ResultHealtCheckScreen from '../screens/ResultHealtCheck';
 import ResultHealtCareScreen from '../screens/ResultHealtCare';
 import AppointScreen from '../screens/staff/Appoint';
+import UserManagePage from '../screens/staff/users';
+import DetailUserPage from '../screens/staff/users/DetailUser';
+import SelectYear from '../screens/staff/users/SelectYear';
+import ReportUserScreen from '../screens/staff/users/ReportUser';
+import MyProfile from '../screens/MyProfile';
 
 const InitNavigation = () => {
   return (
@@ -38,6 +43,11 @@ const InitNavigation = () => {
       <Stack.Screen name="resultHealthCheck" component={ResultHealtCheckScreen} />
       <Stack.Screen name="resultHealthCare" component={ResultHealtCareScreen} />
       <Stack.Screen name="appoint" component={AppointScreen} />
+      <Stack.Screen name="users" component={UserManagePage} />
+      <Stack.Screen name="detailUser" component={DetailUserPage} />
+      <Stack.Screen name="selectYear" component={SelectYear} />
+      <Stack.Screen name="reportUser" component={ReportUserScreen} />
+      <Stack.Screen name="myProfile" component={MyProfile} />
     </Stack.Navigator>
   );
 };

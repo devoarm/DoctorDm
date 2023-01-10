@@ -44,12 +44,17 @@ const HomeScreen = () => {
     <Background>
       <SafeAreaView style={{flex: 1}}>
         <View style={styles.headers}>
-          <Icon
-            size={25}
-            color={Colors.black}
-            style={{marginHorizontal: 10}}
-            name="user-cog"
-          />
+          <TouchableWithoutFeedback
+            onPress={() => {
+              navigation.navigate('myProfile');
+            }}>
+            <Icon
+              size={25}
+              color={Colors.black}
+              style={{marginHorizontal: 10}}
+              name="user-cog"
+            />
+          </TouchableWithoutFeedback>
           <TouchableWithoutFeedback onPress={handleLogout}>
             <Icon
               size={25}

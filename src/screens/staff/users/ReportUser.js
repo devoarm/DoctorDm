@@ -7,37 +7,38 @@ import {
   Alert,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import BackGround1 from '../themes/Background';
+import BackGround1 from '../../../themes/Background';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import BtGoBack from '../components/BtGoBack';
-import Colors from '../themes/Colors';
+import BtGoBack from '../../../components/BtGoBack';
+import Colors from '../../../themes/Colors';
 import {useSelector} from 'react-redux';
 import {Button, Avatar, Text, Divider, HelperText} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
-import CardBorder from '../components/CardBorder';
-import InputHealtCheck from '../components/InputHealtCheck';
+import CardBorder from '../../../components/CardBorder';
+import InputHealtCheck from '../../../components/InputHealtCheck';
 import {useForm, Controller} from 'react-hook-form';
 import firestore from '@react-native-firebase/firestore';
 import {ProgressDialog} from 'react-native-simple-dialogs';
 import moment from 'moment';
-import ChartResultHealt from '../components/ChartResultHealt';
-import ChartBarChart from '../components/ChartBarChart';
-import CircleColor from '../components/CircleColor';
-const ResultHealtCareScreen = () => {
+import ChartResultHealt from '../../../components/ChartResultHealt';
+import ChartBarChart from '../../../components/ChartBarChart';
+import CircleColor from '../../../components/CircleColor';
+const ResultUserScreen = ({route, navigation}) => {
+  const {userData, year} = route.params;
   const user = useSelector(state => state.user);
-  const navigation = useNavigation();
   const [bloodSugar, setBloodSugar] = useState('');
   const [upperPressure, setUpperPressure] = useState('');
   const [lowerPressure, setLowerPressure] = useState('');
   const [healtCheck, setHealtCheck] = useState({});
   const [loading, setLoading] = useState(false);
   const fetchHealt = async () => {
+    console.log(year)
     try {
       const query = await firestore()
         .collection('users')
-        .doc(user.uid)
+        .doc(userData.key)
         .collection('healt_check')
-        .doc(moment().format('YYYY'))
+        .doc(year)
         .get();
       console.log(query.data());
       setBloodSugar(query.data().bloodSugar);
@@ -122,11 +123,11 @@ const ResultHealtCareScreen = () => {
           {/* <View style={styles.cardDetailCare}>
             <View
               style={{
-                marginBottom:15,
+                marginBottom: 15,
                 borderRadius: 5,
                 backgroundColor: Colors.titleCard,
                 alignSelf: 'flex-start',
-                padding:5
+                padding: 5,
               }}>
               <Text>ข้อมูลการดูแลรักษา</Text>
             </View>
@@ -139,7 +140,7 @@ const ResultHealtCareScreen = () => {
   );
 };
 
-export default ResultHealtCareScreen;
+export default ResultUserScreen;
 
 const styles = StyleSheet.create({
   container: {

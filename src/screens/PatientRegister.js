@@ -4,12 +4,23 @@ import SessionBg from '../themes/BackGroundSession';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import BtGoBack from '../components/BtGoBack';
 import Colors from '../themes/Colors';
-import {useSelector} from 'react-redux';
 import {TextInput, Button, Avatar} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
-const PatientRegisterScreen = () => {
+import firestore from '@react-native-firebase/firestore';
+import {useSelector, useDispatch} from 'react-redux';
+import moment from 'moment';
+const PatientRegisterScreen = () => {  
   const user = useSelector(state => state.user);
   const navigation = useNavigation();
+  const onSubmit = async () => {
+    const res = await firestore()
+      .collection(`users`)
+      .doc(user.uid)
+      .collection('healt_check')
+      .doc(moment().format('YYYY'))
+      .set({register: true});
+    navigation.navigate('resultPatientRegister');
+  };
   return (
     <SessionBg>
       <BtGoBack />
@@ -72,7 +83,7 @@ const PatientRegisterScreen = () => {
         <Button
           mode="contained"
           style={{backgroundColor: 'green'}}
-          onPress={() => navigation.navigate('resultPatientRegister')}>
+          onPress={() => onSubmit()}>
           ยืนยัน
         </Button>
       </View>

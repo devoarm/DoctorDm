@@ -13,4 +13,5 @@ export default Colors = {
   bloodSugar: '#EDB18B',
   lowerPressure: '#94D4F2',
   upperPressure: '#F2B8E6',
+  primary:''
 };
